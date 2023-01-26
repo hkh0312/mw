@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/m_header.jsp" %>
 <style>
 table.table2{
          border-collapse: separate;
@@ -40,6 +40,45 @@ table.table2{
   cursor: pointer;
 }
 </style>
+<script>
+$(document).ready(function(){
+	var check = "";
+	$("#c_secret").click(function(){
+		if($("#c_secret").prop("checked")) {
+			console.log("check");
+			$("#c_password").show();
+			check=true;
+		}else if($("#c_secret").prop("checked")==false){
+			$("#c_password").hide();
+			check=false;
+		}	
+	});
+	
+	$("#frmRegister").submit(function(){
+		
+		if($("#c_title").val().trim() == ""){
+			alert("제목을 입력해주세요");
+			$("#c_title").focus();
+			return false;
+		} else if($("#c_content").val().trim() == ""){
+			alert("내용을 입력해주세요");
+			$("#c_content").focus();
+			return false;
+		}else if(check==true){
+			if($("#c_password").val().trim() == ""){
+				alert("비밀번호를 입력해주세요");
+				$("#c_password").focus();
+				return false;
+			}
+		}
+		
+		
+			
+	});
+	
+	
+});
+</script>
 
   <!-- end banner -->
       <div class="back_re">
@@ -56,7 +95,7 @@ table.table2{
       <!-- blog -->
       <div class="blog">
         <div class="container" id="container">
-	    <form method = "post" action = "/qna/register">
+	    <form id="frmRegister" method = "post" action = "/qna/register">
         <table  style="padding-top:50px; margin:auto; width:800px; border:0; cellpadding:2 ">
                 <tr>
                 <td height=20 align= center bgcolor=#ccc><font color=white> 글쓰기</font></td>
@@ -71,7 +110,7 @@ table.table2{
  
                         <tr>
                         <th>작성자</th>
-                        <td><input type="text" id="c_id" name="c_id" placeholder="이름을 입력하세요."></td>
+                        <td><input type="text" id="c_id" name="c_id" placeholder="이름을 입력하세요." value="${loginInfo.userid }" readonly></td>
                         </tr>
  
                         <tr>
@@ -79,20 +118,23 @@ table.table2{
                         <td><textarea cols=85 rows=15 id="c_content" name="c_content" placeholder="내용을 입력하세요."></textarea></td>
                         </tr>
  
-<!--                         <tr> -->
-<!--                         <td>비밀번호</td> -->
-<!--                         <td><input type = password name = pw size=10 maxlength=10></td> -->
-<!--                         </tr> -->
+                        <tr>
+                        <th>비밀번호</th>
+                        <td><input type="checkbox" id="c_secret" name="c_secret" style="margin-left:5px">비밀글 설정
+                        <input type="password" size=10 maxlength=10 name="c_password" id="c_password" placeholder="비밀번호입력" style="display:none"></td>
+                        </tr>
                         </table>
                 </td>
                 </tr>
         </table>
+        <div class="col-sm-12" style="padding-bottom:100px">
         <div class="row"  style="float:right; margin-right:220px">
        		<a href="/qna/list"><button type="button" style="background-color:#ccc">목록으로</button></a>
-		    <button type="submit">작성완료</button>
+		    <button type="submit" id="btnSubmit">작성완료</button>
+		</div>
 		</div>
         </form>
          </div>
       </div>
 
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../include/m_footer.jsp" %>

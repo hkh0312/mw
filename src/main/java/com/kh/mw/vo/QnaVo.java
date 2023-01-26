@@ -15,4 +15,6 @@ public class QnaVo {
 	private int re_seq;
 	private int re_level;
 	private int viewcnt;
+	private boolean c_secret;
+	private String c_password;
 }

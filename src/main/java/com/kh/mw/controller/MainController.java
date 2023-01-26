@@ -5,11 +5,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/board/*")
+@RequestMapping("/main/*")
 public class MainController {
 	
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main() {
-		return "/board/main";
+	@RequestMapping(value = "/home_form", method = RequestMethod.GET)
+	public String home() {
+		return "main/home_form";
 	}
+	
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public String dataInsert() {
+		return "main/updateBlog";
+	}
+	@RequestMapping(value = "/create_form", method = RequestMethod.GET)
+	public String createForm() {
+		return "main/create_form";
+	}
+	
+	// 메인페이지 - Log in
+	@RequestMapping(value = "/login_form", method = RequestMethod.GET)
+	public String login() {
+		return "/main/login_form";
+	}
+	
+	
 }

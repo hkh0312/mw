@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/m_header.jsp" %>
 <style>
 table.table2{
 	border-collapse: separate;
@@ -42,13 +42,16 @@ button {
 </style>
 <script>
 $(document).ready(function(){
-	if(${qnaVo.re_seq} == 1){
+	if(${qnaVo.re_seq} == 1 && ${userVo.userid}!="admin"){
 		$("#btnDelete").hide();
 		$("#btnModify").hide();
 		$("#btnReply").hide();
 	}
-	
-	
+	$("#btnModify").click(function(){
+		$(this).hide();
+		$("#btnModifyRun").show();
+		$("#btnDelete").hide();
+	});
 });
 
 </script>
@@ -97,22 +100,25 @@ $(document).ready(function(){
                         <td colspan="4"><textarea cols=85 rows=15 id="c_content" name="c_content" placeholder="내용을 입력하세요.">${qnaVo.c_content }</textarea></td>
                         </tr>
  
-<!--                         <tr> -->
-<!--                         <td>비밀번호</td> -->
-<!--                         <td><input type = password name = pw size=10 maxlength=10></td> -->
-<!--                         </tr> -->
                         </table>
                 </td>
                 </tr>
         </table>
-        <div class="row"  style="float:right; margin-right:220px">
-       		<a href="/qna/list?page=${pagingDto.page }&perPage=${pagingDto.perPage}"><button type="button" style="background-color:#ccc">목록으로</button></a>
-       		<button id="btnModify" type="submit" style="background-color:#ccc">수정</button>
-       		<a href="/qna/delete?c_no=${qnaVo.c_no }&page=${pagingDto.page}&perPage=${pagingDto.perPage}"><button id="btnDelete" type="button" style="background-color:#ccc">삭제</button></a>
-		    <a href="/qna/reply?c_no=${qnaVo.c_no }&page=${pagingDto.page}&perPage=${pagingDto.perPage}"><button id="btnReply" type="button">답변</button></a>
+       	<div class="col-sm-12" style="padding-bottom:80px">
+	        <div class="row"  style="float:right; margin-right:220px">
+	       		<a href="/qna/list?page=${pagingDto.page }&perPage=${pagingDto.perPage}"><button type="button" style="background-color:#ccc">목록으로</button></a>
+	       		<c:if test="${qnaVo.c_id eq loginInfo.userid}">
+		       		<button id="btnModify" type="button" style="background-color:#ccc">수정</button>
+		       		<button id="btnModifyRun" type="submit" style="display:none">수정완료</button>
+		       		<a href="/qna/delete?c_no=${qnaVo.c_no }&page=${pagingDto.page}&perPage=${pagingDto.perPage}"><button id="btnDelete" type="button" style="background-color:#ccc">삭제</button></a>
+			    </c:if>
+			    <c:if test='${loginInfo.userid eq "admin" && qnaVo.re_level eq 0}'>
+			    	<a href="/qna/reply?c_no=${qnaVo.c_no }&page=${pagingDto.page}&perPage=${pagingDto.perPage}"><button id="btnReply" type="button">답변</button></a>
+			    </c:if>
+			</div>
 		</div>
         </form>
          </div>
       </div>
 
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../include/m_footer.jsp" %>

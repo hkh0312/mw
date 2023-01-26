@@ -2,6 +2,7 @@ package com.kh.mw.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.mw.service.GuestService;
 import com.kh.mw.vo.GuestVo;
+import com.kh.mw.vo.UserVo;
 
 @Controller
 @RequestMapping("/guest/*")
@@ -23,17 +26,29 @@ public class GuestController {
 	
 	// 하객 목록
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
-		List<GuestVo> list = guestService.guestList();
+	public String list(Model model, HttpSession session, RedirectAttributes rttr) {
+		UserVo userVo = (UserVo)session.getAttribute("loginInfo");
+		System.out.println("하객 : " + userVo);
+		if(userVo == null) {
+			return "user/login";
+		}
+		String userid = userVo.getUserid();
+		List<GuestVo> list = guestService.guestList(userid);
 		model.addAttribute("list", list);
+		int count = guestService.getCount(userid);
+		model.addAttribute("count", count);
 		System.out.println("GuestController, list " + list);
-		return "/guest/guest_list";
+		return "guest/guest_list";
 	}
+	
 	
 	// 하객 등록
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
-	public String guestRegister(GuestVo guestVo) {
+	public String guestRegister(GuestVo guestVo, HttpSession session) {
+		UserVo userVo = (UserVo)session.getAttribute("loginInfo");
+		guestVo.setUserid(userVo.getUserid());
+		System.out.println("게스트 등록 : " + guestVo);
 		boolean result = guestService.guestRegister(guestVo);
 		return String.valueOf(result);
 	}

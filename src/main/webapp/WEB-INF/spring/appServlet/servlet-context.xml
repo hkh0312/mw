@@ -31,5 +31,24 @@
 		<beans:property name="maxUploadSize" value="100000000"/>
 	</beans:bean>
 	
+	<!-- 로그인 인터셉터 빈 -->
+	<beans:bean id="loginInterceptor"
+    	class="com.kh.mw.interceptor.LoginInterceptor">
+   	</beans:bean>
+   
+   	
+   	<interceptors>
+    	<interceptor>
+    		<mapping path="/user/**/*"/>
+    		<mapping path="/guest/**/*"/>
+    		<mapping path="/qna/**/*"/>
+    		<exclude-mapping path="/user/login"/>
+    		<exclude-mapping path="/qna/list"/>
+    		<exclude-mapping path="/user/register"/>
+    		<exclude-mapping path="/user/isExistId"/>
+    		<exclude-mapping path="/user/register_run"/>
+    		<beans:ref bean="loginInterceptor"/>
+    	</interceptor>
+    </interceptors>
 	
 </beans:beans>

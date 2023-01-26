@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.user">
+	<insert id="insertUser">
+		insert into tbl_user(userid, userpw, username, email, phonenum, url)
+		values(#{userid}, 
+			#{userpw}, 
+			#{username},
+			#{email},
+			#{phonenum},  
+			#{url,jdbcType=VARCHAR}
+		)
+	</insert>
+	<select id="login" resultType="userVo">
+		select * from tbl_user
+		where userid = #{userid} 
+		and userpw = #{userpw}
+	</select>
+	<select id="isExistId" resultType="int">
+		select count(*) from tbl_user
+		where userid = #{inputId}
+	</select>
+	<select id="detail" resultType="userVo">
+		select * from tbl_user
+		where userid = #{userid}
+		and userpw = #{userpw}
+	</select>
+	<update id="modify">
+		update tbl_user set
+		userpw = #{userpw},
+		username = #{username},
+		email = #{email},
+		phonenum = #{phonenum},
+		url = #{url}
+		where userid = #{userid} 
+	</update>
+	<update id="withdraw">
+		update tbl_user set
+		withdraw = 'y'
+		where userid = #{userid}        
+	</update>
+</mapper>

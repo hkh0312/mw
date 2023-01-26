@@ -52,6 +52,8 @@ public class QnaService {
 		return qnaDao.updateViewcnt(c_no);
 	}
 	
-	
+	public QnaVo getPassword(String c_password, int c_no) {
+		return qnaDao.getPassword(c_password, c_no);
+	}
 	
 }

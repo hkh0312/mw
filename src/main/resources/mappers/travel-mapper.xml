@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="mappers.travel">
+ 
+	<insert id="insert">
+		insert into tbl_Ytravel(clientId, wedPlace, tvl_addr, tvlDetail, mapPic)
+					values(#{clientId}, #{wedPlace}, #{tvl_addr}, #{tvlDetail}, #{mapPic})
+	</insert>
+	
+	<select id="search" resultType="Y_TravelVo">
+		select * from tbl_Ytravel
+			where clientId = #{clientId}	
+	</select>
+	
+	<update id="update">
+		update tbl_Ytravel set
+			wedPlace = #{wedPlace},
+			tvl_addr = #{tvl_addr}, 
+			tvlDetail = #{tvlDetail},
+		<choose>
+			<when test="mapPic == null">
+				mapPic = mapPic
+			</when>
+			<when test="mapPic != null">
+				mapPic = #{mapPic}
+			</when>
+		</choose>
+		where clientId = #{clientId}	
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_Ytravel
+		where clientId = #{clientId}	
+	</delete>
+	
+</mapper>

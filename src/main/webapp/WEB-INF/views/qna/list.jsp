@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/m_header.jsp" %>
 <%@ include file="../include/pageParam.jsp" %>
 <style>
 nav {
@@ -24,12 +24,23 @@ $(document).ready(function(){
 	
 	$(".a_title").click(function(e){
 		e.preventDefault();
+		
 		var c_no = $(this).attr("data-cno");
 		var frm = $("#frmPaging");
-		frm.find("input[name=c_no]").val(c_no);	//input타입 name이 bno인 것에 bno를 넣음
-		frm.attr("action", "/qna/detail");
-		frm.submit();
+		frm.find("input[name=c_no]").val(c_no);	
+		var c_secret = $(this).attr("data-secret");
+		frm.find("input[name=c_secret]").val(c_secret);
+		var src="";
+		console.log(c_secret);
+		if(c_secret == "false"){
+			src = "/qna/detail";	// 비밀글이 아니면 detail로
+		} else if(c_secret == "true"){
+			src = "/qna/password_check";	// 비밀글이면 password_check로
+		} 
+		frm.attr("action", src).submit();
+		
 	});
+	
 	
 	$(".page-link").click(function(e){
 		e.preventDefault();
@@ -109,7 +120,7 @@ $(document).ready(function(){
                         </div>
                     </form>
                  <!-- //Topbar Search -->
-                 <a href="/qna/list"><button type="button" class="btn btn-md btn-secondary" style="margin-bottom:3px;">초기화</button></a>
+                 <a href="/qna/list"><button type="button" class="btn btn-md btn-secondary" style="margin-bottom:3px;">전체목록</button></a>
                  
               </div>      
 			</div>
@@ -124,14 +135,23 @@ $(document).ready(function(){
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${list}" var="qnaVo">
+				<c:forEach items="${list}" var="qnaVo" varStatus="status">
 					<tr>
-						<td>${qnaVo.c_no }</td>
-						<td style="padding-Left:${qnaVo.re_level * 20}px"><a href="#" class="a_title" data-cno="${qnaVo.c_no}">
+						<td>${(count - status.index)-((pagingDto.page-1)*10)}</td>
+						<td style="padding-Left:${qnaVo.re_level * 20}px"><a href="#" class="a_title" data-cno="${qnaVo.c_no}" data-secret="${qnaVo.c_secret}">
+						
 						<c:if test="${qnaVo.re_level gt 0}">
-						 └
+						└
 						</c:if>
-						${qnaVo.c_title }</a></td>
+						<c:choose>
+							<c:when test="${qnaVo.c_secret eq false}">
+								${qnaVo.c_title }
+							</c:when>
+							<c:otherwise>
+								<i class="fa fa-unlock-alt" aria-hidden="true">&nbsp;${qnaVo.c_title}</i>
+							</c:otherwise>
+						</c:choose>
+						</a></td>
 						<td>${qnaVo.c_date }</td>
 						<td>${qnaVo.c_id }</td>
 						<td>${qnaVo.viewcnt}</td>
@@ -143,7 +163,7 @@ $(document).ready(function(){
 
 <!-- pagination -->
 <div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12" style="padding-bottom:100px">
 			<nav class="pagination">
 				<ul class="pagination">
 					<c:if test="${pagingDto.startPage ne 1}">
@@ -180,4 +200,4 @@ $(document).ready(function(){
          </div>
       </div>
 
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../include/m_footer.jsp" %>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/m_header.jsp" %>
 <%@ include file="../include/pageParam.jsp" %>
 <style>
 
@@ -60,10 +60,13 @@ button {
         <div class="container" id="container">
 	    <form id="frm" method="post" action="/qna/reply?page=${pagingDto.page}&perPage=${pagingDto.perPage}">
 <!-- 	    	<input type="hidden" name="c_no" value=""/> -->
-	    	<input type="hidden" name="c_id" value="admin"/>
+	    	<input type="hidden" name="c_id" value="${loginInfo.userid}"/>
 	    	<input type="hidden" name="re_group" value="${qnaVo.re_group }"/>
 			<input type="hidden" name="re_seq" value="${qnaVo.re_seq }"/>
 			<input type="hidden" name="re_level" value="${qnaVo.re_level }"/>
+			<input type="hidden" name="c_secret" value="${qnaVo.c_secret }"/>
+			<input type="hidden" name="c_password" value="${qnaVo.c_password }"/>
+			
 			
         <table  style="padding-top:50px; margin:auto; width:800px; border:0; cellpadding:2 ">
                 <tr>
@@ -110,4 +113,4 @@ button {
          </div>
       </div>
 
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../include/m_footer.jsp" %>

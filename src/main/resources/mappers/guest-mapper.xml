@@ -10,14 +10,16 @@
 	
 	<!-- 하객 명단 -->
 	<select id="guestList" resultType="GuestVo">
-		select * from tbl_guest
+		select g.g_no, g.g_name, g.g_phonenumber from tbl_guest g, tbl_user u
+		where g.userid = u.userid
+		and g.userid = #{userid}
 		order by g_no
 	</select>
 	
 	<!-- 하객 등록 -->
 	<insert id="guestRegister">
-		insert into tbl_guest(g_no, g_name, g_phonenumber)
-		values (#{g_no}, #{g_name}, #{g_phonenumber})
+		insert into tbl_guest(g_no, g_name, g_phonenumber, userid)
+		values (#{g_no}, #{g_name}, #{g_phonenumber}, #{userid})
 	</insert>
 	
 	<!-- 선택 삭제 -->
@@ -37,7 +39,11 @@
 		where g_no = #{g_no}
 	</update>
 	
-	
+	<!-- 목록 갯수 -->
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_guest
+		where userid = #{userid}
+	</select>
 	
 	
 	

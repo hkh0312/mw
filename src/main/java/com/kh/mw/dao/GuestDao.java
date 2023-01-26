@@ -22,8 +22,8 @@ public class GuestDao {
 	}
 	
 	// 하객 명단 조회
-	public List<GuestVo> guestList(){
-		return sqlSession.selectList(NAMESPACE + "guestList");
+	public List<GuestVo> guestList(String userid){
+		return sqlSession.selectList(NAMESPACE + "guestList", userid);
 	}
 	
 	// 하객 등록
@@ -56,7 +56,9 @@ public class GuestDao {
 		return false;
 	}
 	
-	
+	public int getCount(String userid) {
+		return sqlSession.selectOne(NAMESPACE + "getCount", userid);
+	}
 	
 	
 }

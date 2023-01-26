@@ -1,6 +1,8 @@
 package com.kh.mw.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,7 @@ import com.kh.mw.vo.QnaVo;
 @Repository
 public class QnaDao {
 
-	private final String NAMESPACE = "mappers.qna.";
+	private final String NAMESPACE = "mappers.customerqna.";
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -68,6 +70,13 @@ public class QnaDao {
 	
 	public int updateViewcnt(int c_no) {
 		return sqlSession.update(NAMESPACE + "updateViewcnt", c_no);
+	}
+	
+	public QnaVo getPassword(String c_password, int c_no) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("c_password", c_password);
+		map.put("c_no", c_no);
+		return sqlSession.selectOne(NAMESPACE + "getPassword", map);
 	}
 	
 }

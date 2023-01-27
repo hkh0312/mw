@@ -5,17 +5,17 @@
 <%@ include file="../include/m_header.jsp" %>
 
 <!-- 부트스트랩CDN -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-	crossorigin="anonymous"></script>
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" -->
+<!-- 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" -->
+<!-- 	crossorigin="anonymous"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" -->
+<!-- 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" -->
+<!-- 	crossorigin="anonymous"></script> -->
+<!-- <script -->
+<!-- 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" -->
+<!-- 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" -->
+<!-- 	crossorigin="anonymous"></script> -->
 
 <style>
  section#content ul li { display:inline-block; margin:15px; }
@@ -262,7 +262,7 @@ $(function(){
 									<div class="col-md-10">
 										<!-- 테이블 -->
 										<div class="row">
-											<div class="col-md-12">
+											<div class="col-md-12" style="min-height: 700px;">
 												<div class="row">
 													<section id="content">
 														<ul>
@@ -324,7 +324,7 @@ $(function(){
 		</div>
 		
 		<!-- 페이지이동 -->
-		<div class="row">
+		<div class="row" style="padding-bottom:50px">
 			<div class="col-md-12">
 				<nav>
 					<ul class="pagination justify-content-center">
@@ -366,32 +366,4 @@ $(function(){
 
 
 
-
-		<!-- our plane -->
-		<!--  footer -->
-		<footer>
-			<div class="footer">
-				<div class="copyright">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-8 offset-md-2">
-								<p>
-									© 2019 All Rights Reserved. <a href="https://html.design/">
-										Free Html Templates</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
-		<!-- end footer -->
-		<!-- Javascript files-->
-		<script src="/js/jquery.min.js"></script>
-		<script src="/js/bootstrap.bundle.min.js"></script>
-		<script src="/js/jquery-3.0.0.min.js"></script>
-		<!-- sidebar -->
-		<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
-		<script src="/js/custom.js"></script>
-</body>
-</html>	
+<%@ include file="../include/m_footer.jsp" %>

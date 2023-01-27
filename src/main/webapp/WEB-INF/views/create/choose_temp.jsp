@@ -3,12 +3,30 @@
 <%@ include file="../include/m_header.jsp" %>
 <script>
 $(document).ready(function() {
-	$("#temp_h").click(function() {
-		$(location).attr('href', '/create/insert_info');
+	// 템플릿 미리보기
+	$(".wrapdiv_dark").click(function () {
+		var id = $(this).attr("id");
+		switch (id) {
+			case "preview_tempY":
+		 		window.open("/create/ysample");
+				break;
+			case "preview_tempH":
+		 		window.open("/create/preview_tempH");
+				break;
+		}
 	});
 	
-	$("#temp_y").click(function() {
-		$(location).attr('href', '/create/form');
+	// 템플릿 선택
+	$(".template_box").click(function() {
+		var id = $(this).attr("id");
+		switch (id) {
+			case "temp_y":
+				$(location).attr('href', '/create/form');
+				break;
+			case "temp_h":
+				$(location).attr('href', '/tempH/insert_info');
+				break;
+		}
 	});
 	
 	$(".imgdiv_dark").hover(function() {
@@ -20,9 +38,6 @@ $(document).ready(function() {
 		$(this).children().last().hide();
 	});
 	
-	$(".text_dark").hover(function() {
-		$(this).show();
-	});
 });
 </script>
 	  <!-- banner -->
@@ -52,7 +67,7 @@ $(document).ready(function() {
             <div class="row">
                <div class="col-md-6">
                   <div class="plan_bax text_align_center">
-                  	 <div class="wrapdiv_dark">
+                  	 <div id="preview_tempY" class="wrapdiv_dark" style="cursor:pointer;">
 	                  	 <div class="imgdiv_dark">
 	                  	 	<img class="img_dark" src="/main_temp/images/plan_img.jpg" alt="#">
 	                  	 	<p class="text_dark" style="display:none"><a href="#" style="color: white">템플릿 미리보기</a></p>
@@ -60,7 +75,7 @@ $(document).ready(function() {
                   	 </div>
                   	 <div id="temp_y" class="plan_text template_box">
                         <h3>예은's템플릿</h3>
-                        <p style="padding:20px 0 0">예은언니의 템플릿입니다.<br>
+                        <p style="padding:20px 0 0">예은이의 템플릿입니다.<br>
                         	만드려면 클릭하세요.</p>
                      </div>
                   </div>
@@ -68,10 +83,10 @@ $(document).ready(function() {
                
                <div class="col-md-6">
                   <div class="plan_bax text_align_center">
-                  	 <div class="wrapdiv_dark">
+                  	 <div id="preview_tempH" class="wrapdiv_dark" style="cursor:pointer;">
 	                  	 <div class="imgdiv_dark">
 	                  	 	<img class="img_dark" src="/main_temp/images/plan_img1.jpg" alt="#">
-	                  	 	<p class="text_dark" style="display:none"><a href="#" style="color: white">템플릿 미리보기</a></p>
+	                  	 	<p class="text_dark" style="color: white; display:none;">템플릿 미리보기</p>
 	                  	 </div>
                   	 </div>
                      <div id="temp_h" class="plan_text template_box">

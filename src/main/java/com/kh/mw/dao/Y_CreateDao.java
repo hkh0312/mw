@@ -30,9 +30,8 @@ public class Y_CreateDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public boolean insert(Y_HomeVo homeVo, Y_StoryVo storyVo, Y_TravelVo travelVo, Y_PhotoVo photoVo) {
-		int insert_type = 1;
-		if (insert_type == 0) {
+	public boolean insert(Y_HomeVo homeVo, Y_StoryVo storyVo, Y_TravelVo travelVo, Y_PhotoVo photoVo, int prevPjnum) {
+		if (prevPjnum == 0) {
 			int count_h = sqlSession.insert(NAMESPACE_H + "insert", homeVo);
 			int count_s = sqlSession.insert(NAMESPACE_S + "insert", storyVo);
 			int count_t = sqlSession.insert(NAMESPACE_T + "insert", travelVo);
@@ -45,7 +44,7 @@ public class Y_CreateDao {
 				return true;
 			}
 		}
-		if (insert_type == 1) {
+		if (prevPjnum == 1) {
 			System.out.println("createDao update");
 			System.out.println("dao homeVo: " + homeVo);
 			int count_h = sqlSession.update(NAMESPACE_H + "update", homeVo);
@@ -63,14 +62,16 @@ public class Y_CreateDao {
 		return false;
 	}
 
-	public boolean insertQnA(Y_QnaVo qnaVo) {	
+	public boolean insertQnA(Y_QnaVo qnaVo) {
+		System.out.println("qnaVo dao: " + qnaVo);
 		int count = sqlSession.insert(NAMESPACE_Q + "insert", qnaVo);
 		if (count > 0) {
 			return true;
 		}
-	
-	return false;
+
+		return false;
 	}
+
 	public boolean updateQna(Y_QnaVo qnaVo) {
 		int count = sqlSession.update(NAMESPACE_Q + "update", qnaVo);
 		System.out.println("qna update count: " + count);
@@ -79,6 +80,19 @@ public class Y_CreateDao {
 		}
 		return false;
 	}
+
+	public boolean delQna(int qno, String clientId) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("qno", qno);
+		map.put("clientId", clientId);
+		int count = sqlSession.delete(NAMESPACE_Q + "delQna", map);
+		System.out.println("delQna count: " + count);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 	public Y_HomeVo searchHome(String clientId) {
 		Y_HomeVo homeVo = sqlSession.selectOne(NAMESPACE_H + "search", clientId);
 //		System.out.println("dao homeVo: " + homeVo);
@@ -92,6 +106,7 @@ public class Y_CreateDao {
 	}
 
 	public List<Y_QnaVo> searchQna(String clientId) {
+
 		List<Y_QnaVo> qnaVo = sqlSession.selectList(NAMESPACE_Q + "search", clientId);
 		System.out.println("dao QnaVo: " + qnaVo);
 		return qnaVo;
@@ -110,12 +125,12 @@ public class Y_CreateDao {
 	}
 
 	public int countQna(String clientId) {
-	
 		int count = sqlSession.selectOne(NAMESPACE_Q + "count", clientId);
 		System.out.println("dao count :" + count);
 		return count;
 	}
 
+	// 하객 쪽지입력
 	public boolean insertMes(Y_MessageVo mesVo) {
 		int count = sqlSession.insert(NAMESPACE_M + "insert", mesVo);
 		System.out.println("dao insertMes" + count);
@@ -129,6 +144,7 @@ public class Y_CreateDao {
 		return sqlSession.selectList(NAMESPACE_M + "search", clientId);
 	}
 
+	// 하객 질문입력
 	public boolean insertQues(Y_AskVo quesVo) {
 		int count = sqlSession.insert(NAMESPACE_A + "insert", quesVo);
 		if (count > 0) {

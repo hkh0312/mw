@@ -46,7 +46,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		var page = $(this).attr("href");
 		$("#frmPaging").find("input[name=page]").val(page);
-		$("#frmPaging").attr("action", "/qna/list").submit();
+		$("#frmPaging").attr("action", "/qna/qnaList").submit();
 	});
 	
 	$("#btnSearch").click(function(){
@@ -54,7 +54,7 @@ $(document).ready(function(){
 		var keyword = $("#frmSearch").find("[name=keyword]").val();
 		$("#frmPaging").find("[name=searchType]").val(searchType);
 		$("#frmPaging").find("[name=keyword]").val(keyword);
-		$("#frmPaging").attr("action", "/qna/list");
+		$("#frmPaging").attr("action", "/qna/qnaList");
 		$("#frmPaging").submit();
 	});
 	

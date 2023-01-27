@@ -4,7 +4,7 @@
 <script>
 $(document).ready(function() {
 	$(".template_box").click(function() {
-		$(location).attr('href', '/create/insert_info');
+		$(location).attr('href', '/create/h_insert_info');
 	});
 	
 });

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <!-- 축하 메세지 남기기 -->
 	<div id="fh5co-started" class="fh5co-bg" style="background-image:url(/create_tempH/images/img_bg_4.jpg);">
-		<div id="msgleave" class="overlay"></div>
+		<div id="sendMsg" class="overlay"></div>
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
@@ -36,7 +36,7 @@
 						<div class="col-md-7 col-sm-4">
 							<input type="file" style="display:none">
 							<h2 style="margin-top:15px; margin-left:10px; font-size:20px; color:white;"
-								>apple.jpg</h2>
+								>파일명.jpg</h2>
 						</div>
 						<div class="col-md-3 col-sm-4">
 							<button type="button" class="btn btn-default btn-block">파일 선택</button>
@@ -55,6 +55,29 @@
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
-
+	
+	<!-- sendMoney Modal-->
+	<div class="modal fade" id="moneyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	    aria-hidden="true">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h2 id="modalTitle" class="modal-title" id="exampleModalLabel" style="display:inline; font-family:'SimKyungha';">
+	                	축의금 보내기
+	                </h2>
+	                <button id="btnPause" class="close" type="button" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true" style="font-size:30px;">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+		            <p id="modal_p">모달 내용<p>
+	            </div>
+	            <div class="modal-footer">
+	                <button id="btnCancel" class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+	                <button id="btnReply" class="btn btn-primary" type="button">보내기</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 	</body>
 </html>    

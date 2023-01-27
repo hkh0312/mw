@@ -129,7 +129,7 @@ $(document).ready(function(){
         </table>
         <div class="col-sm-12" style="padding-bottom:100px">
         <div class="row"  style="float:right; margin-right:220px">
-       		<a href="/qna/list"><button type="button" style="background-color:#ccc">목록으로</button></a>
+       		<a href="/qna/qnaList"><button type="button" style="background-color:#ccc">목록으로</button></a>
 		    <button type="submit" id="btnSubmit">작성완료</button>
 		</div>
 		</div>

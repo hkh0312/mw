@@ -70,7 +70,7 @@ public class UserController {
 		System.out.println(userVo);
 		boolean result = userService.registerRun(userVo);
 		System.out.println(result);
-		rttr.addFlashAttribute("register_result", result);
+		rttr.addFlashAttribute("register_result", "success");
 		return "redirect:/user/login";
 	}
 	
@@ -121,7 +121,7 @@ public class UserController {
 		boolean result = userService.modify(userVo);
 		System.out.println(result);
 		rttr.addFlashAttribute("update", "success");
-		return "redirect:/user/inputpassword";
+		return "redirect:/user/login";
 	}
 	
 	@RequestMapping(value="/withdraw", method = RequestMethod.POST)

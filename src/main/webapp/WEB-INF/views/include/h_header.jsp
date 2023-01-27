@@ -9,7 +9,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>결혼합니다. &mdash; 신랑 &amp; 신부 </title>
+	<title>결혼합니다. &mdash; 신랑이름 &amp; 신부이름 </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -67,10 +67,12 @@
       $(document).ready(function(){
     	  // 상단 메뉴 active
     	  var path = window.location.href;
-    	  console.log("path: ", path);
     	  var slashIndex = path.lastIndexOf("/");
     	  var category = path.substring(slashIndex+1);
-    	  console.log("category: ", category);
+    	  if (category.includes("#")) { // 새로고침 눌렀을 때 #...이 붙음
+    		  var sharpIndex = category.lastIndexOf("#");
+    		  category = category.substring(0, sharpIndex);
+    	  };
     	  var nowCtg;
     	  switch (category) {
     	  case "h_home": 

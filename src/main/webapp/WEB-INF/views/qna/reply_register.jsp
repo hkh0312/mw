@@ -106,7 +106,7 @@ button {
                 </tr>
         </table>
         <div class="row"  style="float:right; margin-right:220px">
-       		<a href="/qna/list?c_no=${qnaVo.c_no }&page=${pagingDto.page}&perPage=${pagingDto.perPage}"><button type="button" style="background-color:#ccc">취소</button></a>
+       		<a href="/qna/qnaList?c_no=${qnaVo.c_no }&page=${pagingDto.page}&perPage=${pagingDto.perPage}"><button type="button" style="background-color:#ccc">취소</button></a>
        		<button type="submit">답변완료</button>
 		</div>
         </form>

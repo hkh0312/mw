@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.mw.service.GuestService;
+import com.kh.mw.service.Y_CreateService;
 import com.kh.mw.vo.GuestVo;
 import com.kh.mw.vo.UserVo;
 
@@ -23,6 +24,7 @@ public class GuestController {
 
 	@Autowired
 	private GuestService guestService;
+	
 	
 	// 하객 목록
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

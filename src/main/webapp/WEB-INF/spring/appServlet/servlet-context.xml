@@ -35,6 +35,8 @@
 	<beans:bean id="loginInterceptor"
     	class="com.kh.mw.interceptor.LoginInterceptor">
    	</beans:bean>
+   	<beans:bean id="urlInterceptor" class="com.kh.mw.interceptor.UrlInterceptor">
+	</beans:bean>
    
    	
    	<interceptors>
@@ -42,13 +44,20 @@
     		<mapping path="/user/**/*"/>
     		<mapping path="/guest/**/*"/>
     		<mapping path="/qna/**/*"/>
+    		<mapping path="/create/**/*"/>
     		<exclude-mapping path="/user/login"/>
-    		<exclude-mapping path="/qna/list"/>
+    		<exclude-mapping path="/qna/qnaList"/>
     		<exclude-mapping path="/user/register"/>
     		<exclude-mapping path="/user/isExistId"/>
     		<exclude-mapping path="/user/register_run"/>
     		<beans:ref bean="loginInterceptor"/>
     	</interceptor>
+    	<interceptor>
+<!-- 			<mapping path="/url/**/*"/> -->
+			<mapping path="/url/*"/>
+			<exclude-mapping path="/url/home"/>
+			<beans:ref bean="urlInterceptor"/>
+		</interceptor>
     </interceptors>
 	
 </beans:beans>

@@ -106,7 +106,7 @@ $(document).ready(function(){
         </table>
        	<div class="col-sm-12" style="padding-bottom:80px">
 	        <div class="row"  style="float:right; margin-right:220px">
-	       		<a href="/qna/list?page=${pagingDto.page }&perPage=${pagingDto.perPage}"><button type="button" style="background-color:#ccc">목록으로</button></a>
+	       		<a href="/qna/qnaList?page=${pagingDto.page }&perPage=${pagingDto.perPage}"><button type="button" style="background-color:#ccc">목록으로</button></a>
 	       		<c:if test="${qnaVo.c_id eq loginInfo.userid}">
 		       		<button id="btnModify" type="button" style="background-color:#ccc">수정</button>
 		       		<button id="btnModifyRun" type="submit" style="display:none">수정완료</button>

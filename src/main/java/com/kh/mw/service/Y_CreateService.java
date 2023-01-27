@@ -26,8 +26,8 @@ public class Y_CreateService {
 	@Autowired
 	Y_LikeDao y_likeDao;
 
-	public boolean insert(Y_HomeVo homeVo, Y_StoryVo storyVo, Y_TravelVo travelVo, Y_PhotoVo photoVo) {
-		return y_createDao.insert(homeVo, storyVo, travelVo, photoVo);
+	public boolean insert(Y_HomeVo homeVo, Y_StoryVo storyVo, Y_TravelVo travelVo, Y_PhotoVo photoVo, int prevPjnum) {
+		return y_createDao.insert(homeVo, storyVo, travelVo, photoVo, prevPjnum);
 	}
 
 	public boolean insertQnA(Y_QnaVo qnaVo) {
@@ -35,7 +35,11 @@ public class Y_CreateService {
 		return y_createDao.insertQnA(qnaVo);
 	}
 	public boolean updateQna(Y_QnaVo qnaVo) {
+		System.out.println("service update qna: " + qnaVo);
 		return y_createDao.updateQna(qnaVo);
+	}
+	public boolean delQna(int qno, String clientId) {
+		return y_createDao.delQna(qno, clientId);
 	}
 
 	@Transactional
@@ -50,20 +54,39 @@ public class Y_CreateService {
 		List<Y_MessageVo> mesVo = y_createDao.getMes(clientId);
 		int qnacount = y_createDao.countQna(clientId);
 		System.out.println("createService searchInfo: " + qnaVo);
-
+		
 		String pic_url = "/create/displayImg?pic=";
-		String coverPic = pic_url + homeVo.getCoverPic();
-		homeVo.setCoverPic(coverPic);
-		String story_one_pic = pic_url + storyVo.getStory_one_pic();
-		storyVo.setStory_one_pic(story_one_pic);
-		String story_two_pic = pic_url + storyVo.getStory_two_pic();
-		storyVo.setStory_two_pic(story_two_pic);
-		String footerPic = pic_url + photoVo.getFooterpic();
-		photoVo.setFooterpic(footerPic);
-		String mespic = pic_url + photoVo.getMespic();
-		photoVo.setMespic(mespic);
-		String mapPic = pic_url + travelVo.getMapPic();
-		travelVo.setMapPic(mapPic);
+		String coverPic= null;
+		String story_one_pic= null;
+		String story_two_pic= null;
+		String footerPic= null;
+		String mespic= null;
+		String mapPic= null;
+		
+		if (homeVo.getCoverPic() != null) {
+			coverPic = pic_url + homeVo.getCoverPic();
+			homeVo.setCoverPic(coverPic);
+		}
+		if(storyVo.getStory_one_pic() != null) {
+			story_one_pic = pic_url + storyVo.getStory_one_pic();
+			storyVo.setStory_one_pic(story_one_pic);
+		}
+		if(storyVo.getStory_two_pic() != null) {
+			story_two_pic = pic_url + storyVo.getStory_two_pic();
+			storyVo.setStory_two_pic(story_two_pic);
+		}
+		if(photoVo.getFooterpic() != null) {
+			footerPic = pic_url + photoVo.getFooterpic();
+			photoVo.setFooterpic(footerPic);
+		}
+		if(photoVo.getMespic() != null) {
+			mespic = pic_url + photoVo.getMespic();
+			photoVo.setMespic(mespic);
+		}
+		if(travelVo.getMapPic() != null) {
+			mapPic = pic_url + travelVo.getMapPic();
+			travelVo.setMapPic(mapPic);
+		}						
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("homeVo", homeVo);
@@ -109,12 +132,8 @@ public class Y_CreateService {
 		return y_createDao.insertQues(quesVo);
 	}
 
-	public boolean delete(String clientId) {
-		boolean result = y_likeDao.delLike(clientId);
-		if (result) {
-			return y_createDao.delete(clientId);
-		}
-		return false;
+	public boolean delete(String clientId) {		
+		return y_createDao.delete(clientId);
 	}
 	public int countQna(String clientId) {
 		return y_createDao.countQna(clientId);

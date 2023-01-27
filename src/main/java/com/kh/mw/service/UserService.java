@@ -51,5 +51,11 @@ public class UserService {
 		boolean result = userDao.withdraw(userVo);
 		return result;
 	}
+	public int updatepjnum(int prevPjnum, String userid) {
+		return userDao.updatepjnum(prevPjnum, userid);		
+	}
+	public String findid(String url) {
+		return userDao.findid(url);
+	}
 
 }

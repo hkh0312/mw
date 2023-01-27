@@ -29,7 +29,7 @@
 			<div class="col-md-3">
 				<div class="row">
 					<div class="col-md-12">
-						<p class="form_menu" style="margin-top: 15px;">${loginInfo.userid }
+						<p class="form_menu" style="margin-top: 15px; color:black">${loginInfo.userid }
 							님 반갑습니다.</p>
 					</div>
 				</div>

@@ -9,12 +9,12 @@ $(document).ready(function() {
 	$("#btnDelete").click(function () {
 		var d_answer = confirm("프로젝트를 삭제하시겠습니까?");
 		if (d_answer == true) {
-			location.href = "/create/remove";
+			location.href = "/tempH/remove";
 		}
 	});
 	// 미리보기 버튼
 	$("#btnPreview").click(function () {
-		window.open("/create/preview");
+		window.open("/tempH/preview");
 	});
 	
 	// 우측 메뉴별 스크롤이동 버튼
@@ -135,6 +135,11 @@ $(document).ready(function() {
 		target1.remove();
 		target2.remove();
 		target3.remove();
+		
+		var index = ($(".addPhotos").length)-1;
+		var addPhotos = $(".addPhotos")[index];
+		addPhotos.style.display = "block"; // 마지막 부분(삭제부분 앞쪽)에만 추가 a태그 붙이기
+		
 	});
 		
 	// 파일선택 input버튼 클릭
@@ -182,199 +187,207 @@ $(document).ready(function() {
 	
 	// pjnum=1인 경우 이전 데이터 불러오기 - select부분, 반복추가부분
 	// 		(home, homeschedule, photos, qna)
-	// home
-	var strweddate = "${hVo.h_weddate}";
-	var wedy = strweddate.split(" ")[0];
-	wedy = wedy.substr(0, wedy.length-1);
-	var wedm = strweddate.split(" ")[1];
-	wedm = wedm.substr(0, wedm.length-1);
-	var wedd = strweddate.split(" ")[2];
-	wedd = wedd.substr(0, wedd.length-1);
-	for (var i=0; i<$("#h_year").find("option").length; i++) {
-		if($("#h_year").find("option")[i].value == wedy){
-			$("#h_year").find("option")[i].selected = true;
+	if (${loginInfo.pjnum} == 1) {
+		console.log("프로젝트가 존재합니다. 데이터를 불러옵니다.");
+		// home
+		var strweddate = "${hVo.h_weddate}";
+		var wedy = strweddate.split(" ")[0];
+		wedy = wedy.substr(0, wedy.length-1);
+		var wedm = strweddate.split(" ")[1];
+		wedm = wedm.substr(0, wedm.length-1);
+		var wedd = strweddate.split(" ")[2];
+		wedd = wedd.substr(0, wedd.length-1);
+		for (var i=0; i<$("#h_year").find("option").length; i++) {
+			if($("#h_year").find("option")[i].value == wedy){
+				$("#h_year").find("option")[i].selected = true;
+			}
 		}
-	}
-	for (var i=0; i<$("#h_month").find("option").length; i++) {
-		if($("#h_month").find("option")[i].value == wedm){
-			$("#h_month").find("option")[i].selected = true;
+		for (var i=0; i<$("#h_month").find("option").length; i++) {
+			if($("#h_month").find("option")[i].value == wedm){
+				$("#h_month").find("option")[i].selected = true;
+			}
 		}
-	}
-	for (var i=0; i<$("#h_date").find("option").length; i++) {
-		if($("#h_date").find("option")[i].value == wedd){
-			$("#h_date").find("option")[i].selected = true;
+		for (var i=0; i<$("#h_date").find("option").length; i++) {
+			if($("#h_date").find("option")[i].value == wedd){
+				$("#h_date").find("option")[i].selected = true;
+			}
 		}
-	}
-	
-	// homeschedule
-	var list_start_ampm = new Array();
-	var list_start_time = new Array();
-	var list_end_ampm = new Array();
-	var list_end_time = new Array();
-	var list_event = new Array();
-	<c:forEach items="${list_hsVo}" var="hsVo">
-		var start_ampm = "${fn:substringBefore(hsVo.hs_starttime, ' ')}";
-		list_start_ampm.push(start_ampm);
-		var start_time = "${fn:substringAfter(hsVo.hs_starttime, ' ')}";
-		list_start_time.push(start_time);
-		var end_ampm = "${fn:substringBefore(hsVo.hs_endtime, ' ')}";
-		list_end_ampm.push(end_ampm);
-		var end_time = "${fn:substringAfter(hsVo.hs_endtime, ' ')}";
-		list_end_time.push(end_time);
-		list_event.push("${hsVo.hs_event}");
-	</c:forEach>
-	
-	var cnt_hsVo = ${fn:length(list_hsVo)};
-	var add_schedule = $("#div_addSchedule").find("a");
-	
-	var start_ampm = $(".slct_sampm").last();
-	var start_time = $(".slct_stime").last();
-	var end_ampm = $(".slct_eampm").last();
-	var end_time = $(".slct_etime").last();
-	var event = $(".input_event").last();
-	
-	for (var i=0; i<start_ampm.find("option").length; i++) {
-		if(start_ampm.find("option")[i].value == list_start_ampm[0]){
-			start_ampm.find("option")[i].selected = true;
-		}
-		if(end_ampm.find("option")[i].value == list_end_ampm[0]){
-			end_ampm.find("option")[i].selected = true;
-		}
-	}
-	
-	for (var i=0; i<start_time.find("option").length; i++) {
-		if(start_time.find("option")[i].value == list_start_time[0]){
-			start_time.find("option")[i].selected = true;
-		}
-		if(end_time.find("option")[i].value == list_end_time[0]){
-			end_time.find("option")[i].selected = true;
-		}
-	}
-	event.val(list_event[0]);
-	
-	for (var i=1; i<(cnt_hsVo); i++) {
-		add_schedule.trigger("click");
+		
+		// homeschedule
+		var list_start_ampm = new Array();
+		var list_start_time = new Array();
+		var list_end_ampm = new Array();
+		var list_end_time = new Array();
+		var list_event = new Array();
+		<c:forEach items="${list_hsVo}" var="hsVo">
+			var start_ampm = "${fn:substringBefore(hsVo.hs_starttime, ' ')}";
+			list_start_ampm.push(start_ampm);
+			var start_time = "${fn:substringAfter(hsVo.hs_starttime, ' ')}";
+			list_start_time.push(start_time);
+			var end_ampm = "${fn:substringBefore(hsVo.hs_endtime, ' ')}";
+			list_end_ampm.push(end_ampm);
+			var end_time = "${fn:substringAfter(hsVo.hs_endtime, ' ')}";
+			list_end_time.push(end_time);
+			list_event.push("${hsVo.hs_event}");
+		</c:forEach>
+		
+		var cnt_hsVo = ${fn:length(list_hsVo)};
+		var add_schedule = $("#div_addSchedule").find("a");
 		
 		var start_ampm = $(".slct_sampm").last();
 		var start_time = $(".slct_stime").last();
 		var end_ampm = $(".slct_eampm").last();
 		var end_time = $(".slct_etime").last();
+		var event = $(".input_event").last();
 		
-		for (var v=0; v<2; v++) {
-			if(start_ampm.find("option")[v].value == list_start_ampm[i]){
-				start_ampm.find("option")[v].selected = true;
+		for (var i=0; i<start_ampm.find("option").length; i++) {
+			if(start_ampm.find("option")[i].value == list_start_ampm[0]){
+				start_ampm.find("option")[i].selected = true;
 			}
-			if(end_ampm.find("option")[v].value == list_end_ampm[i]){
-				end_ampm.find("option")[v].selected = true;
-			}
-		}
-		for (var w=0; w<start_time.find("option").length; w++) {
-			if(start_time.find("option")[w].value == list_start_time[i]){
-				start_time.find("option")[w].selected = true;
-			}
-			if(end_time.find("option")[w].value == list_end_time[i]){
-				end_time.find("option")[w].selected = true;
+			if(end_ampm.find("option")[i].value == list_end_ampm[0]){
+				end_ampm.find("option")[i].selected = true;
 			}
 		}
-		event = $(".input_event").last();
-		event.val(list_event[i]);
-	}
-	
-	// photos
-	var list_pdpic = new Array();
-	var list_pdy = new Array();
-	var list_pdm = new Array();
-	var list_pdd = new Array();
-	var list_pdtext = new Array();
-	<c:forEach items="${list_pdVo}" var="pdVo">
-		var pdpic = "${pdVo.pd_pic}";
-		list_pdpic.push(pdpic);
-		var strpdate = "${pdVo.pd_pdate}";
-	 	var pdy = strpdate.split(" ")[0];
-	 	pdy = pdy.substr(0, pdy.length-1);
-	 	list_pdy.push(pdy);
-	 	
-	 	var pdm = strpdate.split(" ")[1];
-	 	pdm = pdm.substr(0, pdm.length-1);
-	 	list_pdm.push(pdm);
-	 	
-	 	var pdd = strpdate.split(" ")[2];
-	 	pdd = pdd.substr(0, pdd.length-1);
-	 	list_pdd.push(pdd);
-		list_pdtext.push("${pdVo.pd_text}");
-	</c:forEach>
-	
-	var cnt_pdVo = ${fn:length(list_pdVo)};
-	var add_photos = $(".addPhotos").last();
-	var img_pdpic = $(".img_pdpic").last();
-	if (list_pdpic[0] != null && list_pdpic[0] != "") {
-		img_pdpic.attr("src", "/create/displayImage?pic="+list_pdpic[0]);		
-	} else { console.log("이미지가 null임!"); }
-	for (var i=0; i<$(".p_year").last().find("option").length; i++) {
-		if($(".p_year").last().find("option")[i].value == list_pdy[0]){
-			$(".p_year").last().find("option")[i].selected = true;
+		
+		for (var i=0; i<start_time.find("option").length; i++) {
+			if(start_time.find("option")[i].value == list_start_time[0]){
+				start_time.find("option")[i].selected = true;
+			}
+			if(end_time.find("option")[i].value == list_end_time[0]){
+				end_time.find("option")[i].selected = true;
+			}
 		}
-	}
-	for (var i=0; i<$(".p_month").last().find("option").length; i++) {
-		if($(".p_month").last().find("option")[i].value == list_pdm[0]){
-			$(".p_month").last().find("option")[i].selected = true;
+		event.val(list_event[0]);
+		
+		for (var i=1; i<(cnt_hsVo); i++) {
+			add_schedule.trigger("click");
+			
+			var start_ampm = $(".slct_sampm").last();
+			var start_time = $(".slct_stime").last();
+			var end_ampm = $(".slct_eampm").last();
+			var end_time = $(".slct_etime").last();
+			
+			for (var v=0; v<2; v++) {
+				if(start_ampm.find("option")[v].value == list_start_ampm[i]){
+					start_ampm.find("option")[v].selected = true;
+				}
+				if(end_ampm.find("option")[v].value == list_end_ampm[i]){
+					end_ampm.find("option")[v].selected = true;
+				}
+			}
+			for (var w=0; w<start_time.find("option").length; w++) {
+				if(start_time.find("option")[w].value == list_start_time[i]){
+					start_time.find("option")[w].selected = true;
+				}
+				if(end_time.find("option")[w].value == list_end_time[i]){
+					end_time.find("option")[w].selected = true;
+				}
+			}
+			event = $(".input_event").last();
+			event.val(list_event[i]);
 		}
-	}
-	for (var i=0; i<$(".p_date").last().find("option").length; i++) {
-		if($(".p_date").last().find("option")[i].value == list_pdd[0]){
-			$(".p_date").last().find("option")[i].selected = true;
-		}
-	}
-	var ptext = $(".input_ptext").last();
-	ptext.val(list_pdtext[0]);
-	
-	for (var i=1; i<(cnt_pdVo); i++) {
-		add_photos.trigger("click");
-		img_pdpic = $(".img_pdpic").last();
-		if (list_pdpic[i] != null && list_pdpic[i] != "") {
-			img_pdpic.attr("src", "/create/displayImage?pic="+list_pdpic[i]);
+		
+		// photos
+		var list_pdpic = new Array();
+		var list_pdy = new Array();
+		var list_pdm = new Array();
+		var list_pdd = new Array();
+		var list_pdtext = new Array();
+		<c:forEach items="${list_pdVo}" var="pdVo">
+			var pdpic = "${pdVo.pd_pic}";
+			list_pdpic.push(pdpic);
+			var strpdate = "${pdVo.pd_pdate}";
+		 	var pdy = strpdate.split(" ")[0];
+		 	pdy = pdy.substr(0, pdy.length-1);
+		 	list_pdy.push(pdy);
+		 	
+		 	var pdm = strpdate.split(" ")[1];
+		 	pdm = pdm.substr(0, pdm.length-1);
+		 	list_pdm.push(pdm);
+		 	
+		 	var pdd = strpdate.split(" ")[2];
+		 	pdd = pdd.substr(0, pdd.length-1);
+		 	list_pdd.push(pdd);
+		 	
+		 	var pdtext_br = "${pdVo.pd_text}";
+		 	// 정규식(/<br>/g) -> 모든 <br>을 치환(replaceAll 효과)
+		 	var pdtext = pdtext_br.replace(/<br>/g, "\r\n");
+		 	pdtext = pdtext.replace(/<ttaompyo>/g, "\"");
+		 	list_pdtext.push(pdtext);
+		</c:forEach>
+		
+		var cnt_pdVo = ${fn:length(list_pdVo)};
+		var add_photos = $(".addPhotos").last();
+		var img_pdpic = $(".img_pdpic").last();
+		if (list_pdpic[0] != null && list_pdpic[0] != "") {
+			img_pdpic.attr("src", "/tempH/displayImage?pic="+list_pdpic[0]);		
 		} else { console.log("이미지가 null임!"); }
-		for (var v=0; v<$(".p_year").last().find("option").length; v++) {
-			if($(".p_year").last().find("option")[v].value == list_pdy[i]){
-				$(".p_year").last().find("option")[v].selected = true;
+		for (var i=0; i<$(".p_year").last().find("option").length; i++) {
+			if($(".p_year").last().find("option")[i].value == list_pdy[0]){
+				$(".p_year").last().find("option")[i].selected = true;
 			}
 		}
-		for (var w=0; w<$(".p_month").last().find("option").length; w++) {
-			if($(".p_month").last().find("option")[w].value == list_pdm[i]){
-				$(".p_month").last().find("option")[w].selected = true;
+		for (var i=0; i<$(".p_month").last().find("option").length; i++) {
+			if($(".p_month").last().find("option")[i].value == list_pdm[0]){
+				$(".p_month").last().find("option")[i].selected = true;
 			}
 		}
-		for (var z=0; z<$(".p_date").last().find("option").length; z++) {
-			if($(".p_date").last().find("option")[z].value == list_pdd[i]){
-				$(".p_date").last().find("option")[z].selected = true;
+		for (var i=0; i<$(".p_date").last().find("option").length; i++) {
+			if($(".p_date").last().find("option")[i].value == list_pdd[0]){
+				$(".p_date").last().find("option")[i].selected = true;
 			}
 		}
-		ptext = $(".input_ptext").last();
-		ptext.val(list_pdtext[i]);
-	}
-	
-	// qna
-	var list_q = new Array();
-	var list_a = new Array();
-	<c:forEach items="${list_qdVo}" var="qdVo">
-		list_q.push("${qdVo.qd_q}");
-		list_a.push("${qdVo.qd_a}");
-	</c:forEach>
-	
-	var cnt_qdVo = ${fn:length(list_qdVo)};
-	var add_qna = $("#div_addqna").find("a");
-	
-	var q = $(".input_q").last();
-	q.val(list_q[0]);
-	var a = $(".input_a").last();
-	a.text(list_a[0]);
-	for (var i=1; i<(cnt_qdVo); i++) {
-		add_qna.trigger("click");
-		q = $(".input_q").last();
-		a = $(".input_a").last();
-		q.val(list_q[i]);
-		a.val(list_a[i]);
-	}
+		var ptext = $(".input_ptext").last();
+		ptext.val(list_pdtext[0]);
+		
+		for (var i=1; i<(cnt_pdVo); i++) {
+			add_photos.trigger("click");
+			img_pdpic = $(".img_pdpic").last();
+			if (list_pdpic[i] != null && list_pdpic[i] != "") {
+				img_pdpic.attr("src", "/tempH/displayImage?pic="+list_pdpic[i]);
+			} else { console.log("이미지가 null임!"); }
+			for (var v=0; v<$(".p_year").last().find("option").length; v++) {
+				if($(".p_year").last().find("option")[v].value == list_pdy[i]){
+					$(".p_year").last().find("option")[v].selected = true;
+				}
+			}
+			for (var w=0; w<$(".p_month").last().find("option").length; w++) {
+				if($(".p_month").last().find("option")[w].value == list_pdm[i]){
+					$(".p_month").last().find("option")[w].selected = true;
+				}
+			}
+			for (var z=0; z<$(".p_date").last().find("option").length; z++) {
+				if($(".p_date").last().find("option")[z].value == list_pdd[i]){
+					$(".p_date").last().find("option")[z].selected = true;
+				}
+			}
+			ptext = $(".input_ptext").last();
+			ptext.val(list_pdtext[i]);
+		}
+		
+		// qna
+		var list_q = new Array();
+		var list_a = new Array();
+		<c:forEach items="${list_qdVo}" var="qdVo">
+			list_q.push("${qdVo.qd_q}");
+			list_a.push("${qdVo.qd_a}");
+		</c:forEach>
+		
+		var cnt_qdVo = ${fn:length(list_qdVo)};
+		var add_qna = $("#div_addqna").find("a");
+		
+		var q = $(".input_q").last();
+		q.val(list_q[0]);
+		var a = $(".input_a").last();
+		a.text(list_a[0]);
+		for (var i=1; i<(cnt_qdVo); i++) {
+			add_qna.trigger("click");
+			q = $(".input_q").last();
+			a = $(".input_a").last();
+			q.val(list_q[i]);
+			a.val(list_a[i]);
+		}
+	} // if
 });
 </script>
 	  <!-- banner -->
@@ -426,7 +439,7 @@ $(document).ready(function() {
 	    			<button id="btnPreview" type="button" class="btn btn-red">미리보기</button>
 	  			</div>
 	        </div>
-	        <form action="/create/insert_run" method="post" enctype="multipart/form-data">
+	        <form action="/tempH/insert_run" method="post" enctype="multipart/form-data">
 	        
 	        <!-- HTempPhotos 영역 -->
             <div class="row">
@@ -456,7 +469,7 @@ $(document).ready(function() {
 											src="/main_temp/images/dragdrop.png"
 									    </c:when>
 									    <c:otherwise>
-											src="/create/displayImage?pic=${tpVo.tp_htitlepic}"
+											src="/tempH/displayImage?pic=${tpVo.tp_htitlepic}"
 									    </c:otherwise>
 									</c:choose>
                               	/>
@@ -484,7 +497,7 @@ $(document).ready(function() {
 											src="/main_temp/images/dragdrop.png"
 									    </c:when>
 									    <c:otherwise>
-											src="/create/displayImage?pic=${tpVo.tp_hspic}"
+											src="/tempH/displayImage?pic=${tpVo.tp_hspic}"
 									    </c:otherwise>
 									</c:choose>
                               	/>
@@ -512,7 +525,7 @@ $(document).ready(function() {
 											src="/main_temp/images/dragdrop.png"
 									    </c:when>
 									    <c:otherwise>
-											src="/create/displayImage?pic=${tpVo.tp_mpic}"
+											src="/tempH/displayImage?pic=${tpVo.tp_mpic}"
 									    </c:otherwise>
 									</c:choose>
                               	/>
@@ -540,7 +553,7 @@ $(document).ready(function() {
 											src="/main_temp/images/dragdrop.png"
 									    </c:when>
 									    <c:otherwise>
-											src="/create/displayImage?pic=${tpVo.tp_titlepic}"
+											src="/tempH/displayImage?pic=${tpVo.tp_titlepic}"
 									    </c:otherwise>
 									</c:choose>
 								/>
@@ -594,7 +607,7 @@ $(document).ready(function() {
 											src="/main_temp/images/dragdrop.png"
 									    </c:when>
 									    <c:otherwise>
-											src="/create/displayImage?pic=${hVo.h_pic}"
+											src="/tempH/displayImage?pic=${hVo.h_pic}"
 									    </c:otherwise>
 									</c:choose>
                               	/>
@@ -759,7 +772,7 @@ $(document).ready(function() {
 											src="/main_temp/images/dragdrop.png"
 									    </c:when>
 									    <c:otherwise>
-											src="/create/displayImage?pic=${oVo.o_pic}"	
+											src="/tempH/displayImage?pic=${oVo.o_pic}"	
 									    </c:otherwise>
 									</c:choose>
                               	/>
@@ -998,7 +1011,7 @@ $(document).ready(function() {
 											src="/main_temp/images/dragdrop.png"
 									    </c:when>
 									    <c:otherwise>
-											src="/create/displayImage?pic=${tVo.t_pic}"
+											src="/tempH/displayImage?pic=${tVo.t_pic}"
 									    </c:otherwise>
 									</c:choose>
                               	/>
@@ -1043,7 +1056,7 @@ $(document).ready(function() {
             </div>
          <!-- Travel 영역 끝 -->
          
-         <div class="row">
+         <div class="row" style="padding-bottom:100px">
 	        <div class="col-sm-12 text-lg-start text-center" style="padding:0px">
     			<button id ="btnDelete" type="button" class="btn btn-gray btn-lg">
     				프로젝트 삭제</button>

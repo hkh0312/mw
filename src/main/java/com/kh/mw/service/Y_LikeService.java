@@ -29,5 +29,9 @@ public class Y_LikeService {
 	public int isLike(Y_LikeVo likeVo) {
 		return y_likeDao.isLike(likeVo);
 	}
+	
+	public boolean delLike(Y_LikeVo likeVo) {
+		return y_likeDao.delLike(likeVo);		
+	}
 
 }

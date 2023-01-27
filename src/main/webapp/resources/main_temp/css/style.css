@@ -29,6 +29,57 @@
 @import url(nice-select.css);
 
 /*--------------------------------------------------------------------- skeleton ---------------------------------------------------------------------*/
+#inputpw::placeholder {
+  font-family: 'JSDongkang-Regular';
+}
+
+.smtext {
+	font-family: 'JSDongkang-Regular';
+}
+
+.dpimg_div {
+	width: 505px;
+	height: 300px;
+	overflow: hidden;
+}
+
+.dpimg {
+	width: auto;
+	height: 300px;
+}
+	  
+.dpimg_div2 {
+	width: 555px;
+	height: 325px;
+	overflow: hidden;
+}
+
+.dpimg2 {
+	width: auto;
+	height: 325px;
+}
+
+#moveScroll {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 10rem;
+  height: 35rem;
+  background: transparent;
+  color: #fff;
+ }
+
+* {
+     box-sizing: border-box !important;
+}
+
+#img_dark {
+	filter: brightness(1)
+}
+
+#img_dark:hover {
+	filter: brightness(0.5)
+}
 
 * {
      box-sizing: border-box !important;
@@ -85,13 +136,13 @@ h1 {
 }
 
 h2 {
-     font-family: 'Poppins', sans-serif;
+     font-family: 'JSDongkang-Regular';
      font-size: 22px;
 }
 
 h3 {
      font-size: 18px;
-     font-family: 'Poppins', sans-serif;
+     font-family: 'JSDongkang-Regular';
 }
 
 h4 {
@@ -291,7 +342,8 @@ button {
 
 .navigation.navbar-dark .navbar-nav .nav-link {
      padding: 0 35px;
-     color: #3f3730;
+/*      color: #3f3730; */
+	 color:white;
      font-size: 17px;
      line-height: 20px;
      font-weight: 600;
@@ -299,14 +351,15 @@ button {
 
 .navigation.navbar-dark .navbar-nav .nav-link:focus,
 .navigation.navbar-dark .navbar-nav .nav-link:hover {
-     color: #fff;
+     color: black;
 }
 
 .navigation.navbar-dark .navbar-nav .active>.nav-link,
 .navigation.navbar-dark .navbar-nav .nav-link.active,
 .navigation.navbar-dark .navbar-nav .nav-link.show,
 .navigation.navbar-dark .navbar-nav .show>.nav-link {
-     color: #fff;
+/*      color: #fff; */
+color:black;
 }
 
 .navbar-expand-md .navbar-nav {
@@ -329,7 +382,7 @@ ul.search li a:hover {
 /** banner section **/
 
 .full_bg {
-     background: url(../images/banner2.jpg);
+     background: url(../images/hero.jpeg);
      background-size: 100% 100%;
      background-position: center;
      background-repeat: no-repeat;
@@ -337,7 +390,7 @@ ul.search li a:hover {
 
 .banner_main {
      position: relative;
-     padding-bottom: 175px;
+     padding-bottom: 280px;
 }
 
 .build_box {
@@ -418,7 +471,7 @@ ul.search li a:hover {
      font-size: 40px;
      color: #252525;
      line-height: 40px;
-     font-weight: bold;
+     font-weight: normal;
      padding-top: 8px !important;
      padding: 0;
 }
@@ -519,7 +572,8 @@ ul.search li a:hover {
 }
 
 .plan_text {
-     background-color: #f8d98f;
+/*      background-color: #f8d98f; */
+     background-color: #CFBDAB;
      cursor: pointer;
      padding: 49px 40px;
 }
@@ -781,7 +835,7 @@ ul.search li a:hover {
      font-size: 30px;
      font-weight: 600;
      padding-bottom: 20px;
-     font-family: 'Raleway', sans-serif;
+     font-family:  'JSDongkang-Regular', sans-serif;
 }
 
 .readert_text p {
@@ -992,12 +1046,21 @@ ul.social_icon li a i:hover {
 /** endinner page css **/
 
 .inner_page .full_bg {
-     background-color: #e77064 !important;
-     background: transparent;
+/*      background-color: #F8D98F !important; #e77064 */
+/*      background: transparent; */
+     background: url(../images/banner2.jpg);
+     background-size: 100% 100%;
+     background-position: center;
+     background-repeat: no-repeat;
 }
 
 .back_re {
-     background-color: #423d31;
+/*      background-color: #F8D98F; #423d31 */
+/*      background: url(../images/banner2.jpg); */
+     background: #666666;
+     background-size: 100% 100%;
+     background-position: center;
+     background-repeat: no-repeat;
 }
 
 .back_re .title {

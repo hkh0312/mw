@@ -23,7 +23,8 @@ public class QnaController {
 	@Autowired
 	private QnaService qnaService;
 	
-	@RequestMapping(value="/list", method = RequestMethod.GET)
+	// 게시글 리스트
+	@RequestMapping(value="/qnaList", method = RequestMethod.GET)
 	public String list(Model model, PagingDto pagingDto, HttpSession session) {
 		UserVo userVo = (UserVo)session.getAttribute("loginInfo");
 //		System.out.println("QnaController, list: ");
@@ -38,6 +39,7 @@ public class QnaController {
 		return "qna/list";
 	}
 	
+	// 게시글등록 폼
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register_form(HttpSession session) {
 //		System.out.println("QnaController , register_form: ");
@@ -46,14 +48,16 @@ public class QnaController {
 		return "qna/register";
 	}
 	
+	// 게시글등록
 	@RequestMapping(value="/register", method = RequestMethod.POST)
 	public String register(QnaVo qnaVo) {
 		qnaService.qnaRegister(qnaVo);
 		System.out.println("register, qnaVo " + qnaVo);
 		
-		return "redirect:/qna/list";
+		return "redirect:/qna/qnaList";
 	}
 	
+	// 게시글 상세보기
 	@RequestMapping(value="/detail", method = RequestMethod.GET)
 	public String detail(int c_no, Model model, PagingDto pagingDto, HttpSession session) {
 		UserVo userVo = (UserVo)session.getAttribute("loginInfo");
@@ -65,7 +69,7 @@ public class QnaController {
 		return "qna/detail";
 	}
 	
-	
+	// 게시글 수정
 	@RequestMapping(value="/modify", method = RequestMethod.POST)
 	public String modify(QnaVo qnaVo) {
 //		System.out.println("modify"+qnaVo);
@@ -73,13 +77,15 @@ public class QnaController {
 		return "redirect:/qna/detail?c_no="+qnaVo.getC_no();
 	}
 	
+	// 게시글 삭제
 	@RequestMapping(value="/delete", method = RequestMethod.GET)
 	public String delete(int c_no, PagingDto pagingDto) {
 		qnaService.qnaDelete(c_no);
 //		System.out.println("delete");
-		return "redirect:/qna/list";
+		return "redirect:/qna/qnaList";
 	}
 	
+	// 답변 달기 폼
 	@RequestMapping(value = "/reply", method = RequestMethod.GET)
 	public String reply(QnaVo qnaVo, Model model, PagingDto pagingDto) {
 		int c_no = qnaVo.getC_no();
@@ -91,14 +97,15 @@ public class QnaController {
 		return "qna/reply_register";
 	}
 	
+	// 답변 달기
 	@RequestMapping(value = "/reply", method = RequestMethod.POST)
 	public String reply_ok(QnaVo qnaVo, PagingDto pagingDto) {
 //		System.out.println("Controller, reply: " + qnaVo);
 		qnaService.insertReply(qnaVo);
-		return "redirect:/qna/list";
+		return "redirect:/qna/qnaList";
 	}
 	
-	// 비밀글 확인
+	// 비밀글 확인 폼
 	@RequestMapping(value="/password_check", method=RequestMethod.GET)
 	public String password_check(PagingDto pagingDto, QnaVo qnaVo) {
 //			Integer c_no = qnaVo.getC_no();

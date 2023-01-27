@@ -217,8 +217,11 @@ $(document).ready(function() {
 		});
 		
 		console.log("arr_g_no", arr_g_no);
+		var userid = "${loginInfo.userid}";
+		console.log(userid);
+		
 		var url = "/sms/send";
-		var sData = {"arr_g_no" : arr_g_no};
+		var sData = {"arr_g_no" : arr_g_no, "userid" : userid};
 		$.post(url, sData, function(rData){
 			console.log(sData);
 			console.log(rData);
@@ -339,8 +342,8 @@ $(document).ready(function() {
 		<div class="row">
 		<div class="col-md-12">
 		  <button type="button" id="btnRegister" class="button button4">하객 추가</button>
-		  <button type="button" id="btnDelete" class="button button4">삭제</button>
-		  <button type="submit" id="btnSend" class="button button4">청첩장보내기</button>
+		  <button type="button" id="btnDelete" class="button button4">하객 삭제</button>
+		  <button type="submit" id="btnSend" class="button button4" style="float:right">청첩장보내기</button>
           </div>
           </div>
 <!--           </form> -->

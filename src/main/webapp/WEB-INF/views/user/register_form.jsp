@@ -96,36 +96,37 @@
 			<div class="col-md-4">
 				<form id="frmRegister" action="/user/register_run" method="post">
 					<div class="form-group">
-						<label for="userid">아이디<i class="fa fa-asterisk" aria-hidden="true" style="color:red; size=10px"></i></label> <input type="text"
+						<label for="userid">아이디&nbsp<i class="fa fa-asterisk" aria-hidden="true" style="color:red; font-size:8px"></i></label> <input type="text"
 							class="form-control" id="userid" placeholder="아이디" name="userid">
 						<button type="button" class="btn btn-primary btn-sm"
 							id="btncheckId">아이디 중복 확인</button>
 					</div>
 					<div class="form-group">
-						<label for="userpw">비밀번호</label> <input type="password"
+						<label for="userpw">비밀번호&nbsp<i class="fa fa-asterisk" aria-hidden="true" style="color:red; font-size:8px"></i></label> <input type="password"
 							class="form-control" id="userpw" placeholder="비밀번호" name="userpw">
 					</div>
 					<div class="form-group">
-						<label for="chkuserpw">비밀번호 확인</label> <input type="password"
+						<label for="chkuserpw">비밀번호 확인&nbsp<i class="fa fa-asterisk" aria-hidden="true" style="color:red; font-size:8px"></i></label> <input type="password"
 							class="form-control" id="chkuserpw" placeholder="비밀번호 확인">
 						<p style="font-size: 12px" id="pwcheckok"></p>
 					</div>
 					<div class="form-group">
-						<label for="username">이름</label> <input type="text"
+						<label for="username">이름&nbsp<i class="fa fa-asterisk" aria-hidden="true" style="color:red; font-size:8px"></i></label> <input type="text"
 							class="form-control" id="username" placeholder="이름"
 							name="username">
 					</div>
 					<div class="form-group">
-						<label for="email">이메일</label> <input type="email"
+						<label for="email">이메일&nbsp<i class="fa fa-asterisk" aria-hidden="true" style="color:red; font-size:8px"></i></label> <input type="email"
 							class="form-control" id="email" placeholder="이메일" name="email">
 					</div>
 					<div class="form-group">
-						<label for="phonenum">전화번호</label> <input type="tel"
+						<label for="phonenum">전화번호&nbsp<i class="fa fa-asterisk" aria-hidden="true" style="color:red; font-size:8px"></i></label> <input type="tel"
 							class="form-control" id="phonenum" name="phonenum"
 							placeholder="'-'빼고 입력해주세요.">
 					</div>
 					<div class="form-group">
-						<label for="url">홈페이지 주소 입력</label><br><input type="text" value="/board/pageaddr" class="form-control" readonly>
+						<label for="url">홈페이지 주소 입력</label><br>
+<!-- 						<input type="text" value="/board/pageaddr" class="form-control" readonly> -->
 						<input type="text" class="form-control" id="url" name="url" placeholder="example: @merrywedding">
 					</div>
 

@@ -27,11 +27,15 @@ public class Y_LikeDao {
 	}
 
 	public int isLike(Y_LikeVo likeVo) {
-		return sqlsession.selectOne(NAMESPACE_L + "isLike", likeVo);
+		System.out.println("dao isLike likeVo: " + likeVo);
+		int likeCount = sqlsession.selectOne(NAMESPACE_L + "isLike", likeVo);
+		System.out.println("dao likeCOunt: " + likeCount);
+		return likeCount;
 	}
 
-	public boolean delLike(String clientId) {
-		int count = sqlsession.delete(NAMESPACE_L + "delLike", clientId);
+	public boolean delLike(Y_LikeVo likeVo) {
+		int count = sqlsession.delete(NAMESPACE_L + "delLike", likeVo);
+		System.out.println("delLike count: " + count);
 		if (count > 0) {
 			return true;
 		}

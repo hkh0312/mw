@@ -495,7 +495,6 @@ h1, h2, h3, h4, h5, h6, figure {
 #fh5co-event .event-wrap .event-col {
   width: 50%;
   float: left;
-  margin-bottom: 30px;
 }
 
 #fh5co-counter {
@@ -563,7 +562,7 @@ h1, h2, h3, h4, h5, h6, figure {
 .timeline > li > .timeline-panel:after {
   position: absolute;
   top: 81px;
-  right: -14px;
+  right: -13px;
   display: inline-block;
   border-top: 14px solid transparent;
   border-left: 14px solid #fff;
@@ -606,7 +605,7 @@ h1, h2, h3, h4, h5, h6, figure {
   top: 86px;
   left: 56%;
   margin-left: -80px;
-  background-color: #687393;
+  background-color: #3F4E4F;
   z-index: 100;
 /*   -webkit-border-radius: 50%; */
 /*   -moz-border-radius: 50%; */
@@ -632,7 +631,7 @@ h1, h2, h3, h4, h5, h6, figure {
 .timeline > li.timeline-inverted > .timeline-panel:after {
   border-left-width: 0;
   border-right-width: 14px;
-  left: -14px;
+  left: -13px;
   right: auto;
 }
 
@@ -1749,13 +1748,13 @@ form label {
 }
 
 .btn-primary {
-  background: #F14E95;
+  background: #3F4E4F;
   color: #fff;
-  border: 2px solid #F14E95;
+  border: 2px solid #3F4E4F;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background: #f366a3 !important;
-  border-color: #f366a3 !important;
+  background: #DCD7C9 !important;
+  border-color: #DCD7C9 !important;
 }
 .btn-primary.btn-outline {
   background: transparent;

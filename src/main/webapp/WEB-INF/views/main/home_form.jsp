@@ -30,6 +30,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
 	media="screen">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -42,8 +43,81 @@
 <!-- <script src="/main_temp/js/custom.js"></script> -->
 <!-- 스크립트 시작 -->
 <script>
+$(document).ready(function(){
+	//상단 메뉴 active
+	  var path = window.location.href;
+	  var slashIndex = path.lastIndexOf("/");
+	  console.log(slashIndex);
+	  var category = path.substring(slashIndex+1);
+	  console.log(category);
+	  if (category.includes("#")) { // 새로고침 눌렀을 때 #...이 붙음
+		  var sharpIndex = category.lastIndexOf("#");
+		  category = category.substring(0, sharpIndex);
+	  };
+	  var nowCtg;
+	  switch (category) {
+	  case "home_form": 
+		  nowCtg = $("#ctgHome");
+		  break;
+	  case "list":
+		  nowCtg = $("#ctgPlanner");
+		  break;
+	  case "create_form":
+		  nowCtg = $("#ctgCreate");
+		  break;
+	  case "choose_temp":
+		  nowCtg = $("#ctgCreate");
+		  break;
+	  case "insert_info":
+		  nowCtg = $("#ctgCreate");
+		  break;
+	  case "qnaList":
+		  nowCtg = $("#ctgQna");
+		  break;
+	  case "login":
+		  nowCtg = $("#ctgLogin");
+		  break;
+	  }
+	  var activeCtg = $(".nav-item.active");
+	  if (activeCtg.length == 1) {
+		  activeCtg.removeClass("active");
+	  }
+	  nowCtg.addClass("active");
+});
 </script>
 <style>
+p{
+	color:#E76F64;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-menu a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+		
 </style>
 </head>
 <!-- body -->
@@ -85,11 +159,11 @@
 									<li class="nav-item" id="ctgCreate"><a class="nav-link"
 										href="/main/create_form">Create My Page</a></li>
 									<li class="nav-item" id="ctgQna"><a class="nav-link"
-										href="/qna/list">QnA</a></li>
+										href="/qna/qnaList">QnA</a></li>
 									<c:choose>
 										<c:when test="${empty loginInfo}">
 										<!-- 로그인이 되어 있지 않은 경우 -->
-											<li>
+											<li class="nav-item">
 											<a href="/user/login"><i class="nav-link fa fa-user"
 												id="loginpage" aria-hidden="true">Login</i></a>
 											</li>
@@ -100,25 +174,33 @@
 											<c:choose>
 												<c:when test="${loginResult eq 'manager'}">
 													<div class="dropdown">
-														<p class="fa dropdown-toggle" type="button"
-															data-toggle="dropdown">
-															관리자님 환영합니다.
-														</p>
-														<ul class="dropdown-menu">
+<!-- 														<p class="fa dropdown-toggle" type="button" -->
+<!-- 															data-toggle="dropdown"> -->
+<!-- 															관리자님 환영합니다. -->
+<!-- 														</p> -->
+														<ul class="navbar-nav mr-auto">
+															<li class="nav-item"><a href="#" class="nav-link" style="color:#E76F64">관리자님 환영합니다.&nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></a>
+														<ul class="dropdown-menu" style="right:0">
 															<li><a href="/admin/page">관리자페이지로 가기</a></li>
 															<li><a href="/user/logout">로그아웃</a></li>
+														</ul>
+														</li>
 														</ul>
 													</div>
 												</c:when>
 												<c:otherwise>
 													<div class="dropdown">
-														<p class="fa dropdown-toggle" type="button"
-															data-toggle="dropdown">
-															${loginInfo.userid}님 환영합니다.
-														</p>
-														<ul class="dropdown-menu">
+<!-- 														<p class="fa dropdown-toggle nav-item" type="button" -->
+<!-- 															data-toggle="dropdown"> -->
+<%-- 															${loginInfo.userid}님 환영합니다. --%>
+<!-- 														</p> -->
+														<ul class="navbar-nav mr-auto">
+															<li class="nav-item"><a href="#" class="nav-link" style="color:#E76F64">${loginInfo.userid}님 환영합니다.&nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></a>
+														<ul class="dropdown-menu" style="right:0">
 															<li><a href="/user/inputpassword">마이페이지</a></li>
 															<li><a href="/user/logout">로그아웃</a></li>
+														</ul>
+														</li>
 														</ul>
 													</div>
 												</c:otherwise>

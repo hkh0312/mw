@@ -13,7 +13,7 @@
       $(document).ready(function(){
     	var register_result = "${register_result}";
     	console.log(register_result);
-    	if(register_result == true){
+    	if(register_result == "success"){
     		alert("회원가입되었습니다. 로그인해주세요.");
     	}
     	  

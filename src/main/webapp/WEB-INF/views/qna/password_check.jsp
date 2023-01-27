@@ -53,7 +53,7 @@ $(document).ready(function(){
 				<tbody>
 					<tr>
 						<td>
-							<p style="text-align:center">비밀글 기능으로 보호된 글입니다.<br><strong>비밀번호를 입력해주세요.</strong></p>
+							<p style="text-align:center; color:black" >비밀글 기능으로 보호된 글입니다.<br><strong>비밀번호를 입력해주세요.</strong></p>
 						</td>
 					</tr>
 					<tr>
@@ -64,7 +64,7 @@ $(document).ready(function(){
 							<button type="submit" class="btn btn-primary btnSubmit">
 								확인
 							</button>
-							<a href="/qna/list"><button type="button" class="btn btn-secondary">목록으로</button></a>
+							<a href="/qna/qnaList"><button type="button" class="btn btn-secondary">목록으로</button></a>
 							
 						</div>
 						</td>

@@ -78,5 +78,22 @@ public class UserDao {
 		}
 		return false;
 	}
+	
+	public int updatepjnum(int prevPjnum, String userid) {
+		int pjnum = prevPjnum + 1;
+		Map<String,Object> map = new HashMap<>();
+		map.put("pjnum", pjnum);
+		map.put("userid", userid);
+		System.out.println("pjnum: " + pjnum);
+		return sqlSession.update(NAMESPACE + "updatepjnum", map);
+	}
+	
+	public String findid(String url) {
+		System.out.println("userdao url: " + url);
+		UserVo userVo = sqlSession.selectOne(NAMESPACE + "findid", url);
+		String clientId = userVo.getUserid();
+		System.out.println("userDao clientId: " + clientId);
+		return clientId;
+	}
 
 }
